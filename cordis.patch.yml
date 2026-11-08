@@ -7,6 +7,6 @@
         serverName: agentswarm
         transport: streamable-http
         url: https://agentswarm-remote.andrew-4ad.workers.dev/mcp
-        failOnStartupError: true
+        failOnStartupError: false
     - id: dsh-agentswarm-skill
       name: dsh-agentswarm

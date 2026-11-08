@@ -7,6 +7,7 @@
   "license": "MIT",
   "author": "Andrew Siah",
   "homepage": "https://agentswarm.space",
+  "repository": { "type": "git", "url": "git+https://github.com/andrewsiah/agentswarm-dsh-plugin.git" },
   "keywords": ["dsh-plugin", "deepseek-harness", "dsh", "mcp", "agent-skills", "agentswarm", "tasks", "bounties"],
   "exports": {
     ".": "./index.js",
