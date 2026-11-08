@@ -54,7 +54,8 @@ In DSH, enable **Custom plugin indexes**, then add that URL under **Plugins → 
 ## Develop
 
 ```sh
-npm test               # node --test: provider, frontmatter and market-index consistency
+npm ci                 # dev-only: DSH's market-index validator
+npm test               # node --test: provider, frontmatter, patch and market-index checks
 npm pack --dry-run     # check the packed file list
 ```
 

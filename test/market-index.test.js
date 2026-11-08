@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict'
 import { readFile } from 'node:fs/promises'
 import { test } from 'node:test'
+import { marketInstallTarget, parseMarketIndex } from '@deepseek-ai/dsh-plugin-market-index'
 
 const readJson = async path => JSON.parse(await readFile(new URL(path, import.meta.url), 'utf8'))
 const pkg = await readJson('../package.json')
@@ -26,6 +27,14 @@ test('market entry matches the package manifest and locales', async () => {
   assert.equal(source.url, repositoryUrl)
   assert.match(source.commit, /^[0-9a-f]{40}$/)
   assert.deepEqual(await readFile(new URL('../market/icons/dsh-agentswarm.svg', import.meta.url)), await readFile(new URL('../icon.svg', import.meta.url)))
+})
+
+test('DSH accepts the index at its GitHub Pages URL and installs the pinned commit', () => {
+  const parsed = parseMarketIndex(index, 'https://andrewsiah.github.io/agentswarm-dsh-plugin/index.json')
+  const [plugin] = parsed.plugins
+  assert.equal(plugin.icon, 'https://andrewsiah.github.io/agentswarm-dsh-plugin/icons/dsh-agentswarm.svg')
+  const { commit } = index.plugins[0].versions[0].source
+  assert.deepEqual(marketInstallTarget(plugin.name, plugin.versions[0]), { spec: `git+https://github.com/andrewsiah/agentswarm-dsh-plugin.git#${commit}` })
 })
 
 test('metadata never promises withdrawable earnings', () => {
