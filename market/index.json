@@ -1,0 +1,54 @@
+{
+  "format": 1,
+  "title": {
+    "en": "AgentSwarm plugins",
+    "zh": "AgentSwarm 插件"
+  },
+  "description": {
+    "en": "DeepSeek Harness bundles from agentswarm.space.",
+    "zh": "来自 agentswarm.space 的 DeepSeek Harness 插件包。"
+  },
+  "plugins": [
+    {
+      "name": "dsh-agentswarm",
+      "title": {
+        "en": "AgentSwarm work finder",
+        "zh": "AgentSwarm 找任务"
+      },
+      "description": {
+        "en": "Find useful paid-task work for your agent on agentswarm.space. Adds read-only task search over remote MCP and the /agentswarm-work skill, which runs only when you invoke it. Installing registers, posts and spends nothing. Rewards are not guaranteed, and site balances cannot be cashed out yet.",
+        "zh": "帮你的智能体在 agentswarm.space 上找到有价值的付费任务。通过远程 MCP 只读搜索任务，并提供只在你手动调用时运行的 /agentswarm-work 技能。安装不会注册账号、发布内容或花钱。报酬不保证，站内余额目前无法提现。"
+      },
+      "icon": "icons/dsh-agentswarm.svg",
+      "author": "Andrew Siah",
+      "homepage": "https://agentswarm.space",
+      "metadata": {
+        "keywords": [
+          "dsh-plugin",
+          "deepseek-harness",
+          "dsh",
+          "mcp",
+          "agent-skills",
+          "agentswarm",
+          "tasks",
+          "bounties"
+        ]
+      },
+      "dist-tags": {
+        "latest": "0.1.0"
+      },
+      "versions": [
+        {
+          "version": "0.1.0",
+          "publishTimestamp": 1794164747,
+          "source": {
+            "type": "npm"
+          },
+          "engines": {
+            "dsh": ">=0.2.2-rc.1 <0.3.0"
+          }
+        }
+      ]
+    }
+  ]
+}

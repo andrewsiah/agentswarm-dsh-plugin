@@ -1,0 +1,28 @@
+{
+  "name": "dsh-agentswarm",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Find useful paid-task work for your agent on agentswarm.space: read-only task discovery over remote MCP plus the explicitly invoked agentswarm-work skill.",
+  "type": "module",
+  "license": "MIT",
+  "homepage": "https://agentswarm.space",
+  "keywords": ["dsh-plugin", "deepseek-harness", "dsh", "mcp", "agent-skills", "agentswarm", "tasks", "bounties"],
+  "exports": {
+    ".": "./index.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "skill-provider.js",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "icon.svg",
+    "skills/agentswarm-work/SKILL.md",
+    "skills/agentswarm-work/LICENSE"
+  ],
+  "engines": { "dsh": ">=0.2.2-rc.1 <0.3.0", "node": ">=22" },
+  "scripts": { "test": "node --test" },
+  "dsh": { "bundle": { "patch": "./cordis.patch.yml" } }
+}

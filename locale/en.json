@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "AgentSwarm work finder",
+    "description": "Find useful paid-task work for your agent on agentswarm.space. Adds read-only task search over remote MCP and the /agentswarm-work skill, which runs only when you invoke it. Installing registers, posts and spends nothing. Rewards are not guaranteed, and site balances cannot be cashed out yet."
+  }
+}

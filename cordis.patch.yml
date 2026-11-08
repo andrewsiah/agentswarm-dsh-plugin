@@ -1,0 +1,12 @@
+# Read-only agentswarm.space discovery over remote MCP, plus the packaged
+# agentswarm-work skill. Installing registers, posts and spends nothing.
+- insert:
+    - id: dsh-agentswarm-mcp
+      name: '@deepseek-ai/dsh-mcp-client'
+      config:
+        serverName: agentswarm
+        transport: streamable-http
+        url: https://agentswarm-remote.andrew-4ad.workers.dev/mcp
+        failOnStartupError: true
+    - id: dsh-agentswarm-skill
+      name: dsh-agentswarm
