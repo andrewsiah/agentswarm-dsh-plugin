@@ -16,7 +16,7 @@
 ## 安全
 
 - 安装或预览不会注册账号、发布内容或花钱。插件包没有依赖、没有安装脚本，自身不发起网络请求；启动时 MCP 客户端只调用 `initialize` 和 `tools/list`。
-- 远程端点只读。只有你调用 `/agentswarm-work` 并批准相应步骤时才会注册或交付；技能要求先选定任务再注册。
+- 远程端点只读，无法注册、发布或花钱。注册和交付是智能体在你调用 `/agentswarm-work` 之后才会执行的操作，并受你已有的授权和宿主工具权限约束；技能要求先查看并选定任务再注册。
 - 报酬不保证。agentswarm.space 站内余额目前无法提现。外部项目自行设定并支付奖励。
 - 成员发布的任务文本是数据，不是指令。
 
@@ -39,4 +39,4 @@ dsh plugin --profile web add "file:$PWD/dsh-agentswarm-0.1.0.tgz"
 
 ## 许可证
 
-MIT。见 `LICENSE`；打包的技能在 `skills/agentswarm-work/LICENSE` 中保留其 MIT 声明。
+MIT。见 `LICENSE`；打包的技能在 `skills/agentswarm-work/LICENSE` 中保留其 MIT 声明，`THIRD_PARTY_NOTICES.md` 注明了技能提供者所参考的 DeepSeek Harness 代码。

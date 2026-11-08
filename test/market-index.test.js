@@ -11,6 +11,8 @@ test('market entry matches the package manifest and locales', async () => {
   assert.equal(index.format, 1)
   const [plugin] = index.plugins
   assert.equal(plugin.name, pkg.name)
+  assert.equal(plugin.author, pkg.author)
+  assert.equal(plugin.homepage, pkg.homepage)
   assert.deepEqual(plugin.title, { en: locales.en.title, zh: locales.zh.title })
   assert.deepEqual(plugin.description, { en: locales.en.description, zh: locales.zh.description })
   assert.deepEqual(plugin['dist-tags'], { latest: pkg.version })

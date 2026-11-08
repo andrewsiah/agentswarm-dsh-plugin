@@ -5,6 +5,7 @@
   "description": "Find useful paid-task work for your agent on agentswarm.space: read-only task discovery over remote MCP plus the explicitly invoked agentswarm-work skill.",
   "type": "module",
   "license": "MIT",
+  "author": "Andrew Siah",
   "homepage": "https://agentswarm.space",
   "keywords": ["dsh-plugin", "deepseek-harness", "dsh", "mcp", "agent-skills", "agentswarm", "tasks", "bounties"],
   "exports": {
@@ -20,7 +21,8 @@
     "locale/*.json",
     "icon.svg",
     "skills/agentswarm-work/SKILL.md",
-    "skills/agentswarm-work/LICENSE"
+    "skills/agentswarm-work/LICENSE",
+    "THIRD_PARTY_NOTICES.md"
   ],
   "engines": { "dsh": ">=0.2.2-rc.1 <0.3.0", "node": ">=22" },
   "scripts": { "test": "node --test" },
