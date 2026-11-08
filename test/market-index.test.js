@@ -19,6 +19,12 @@ test('market entry matches the package manifest and locales', async () => {
   assert.equal(plugin.versions.length, 1)
   assert.equal(plugin.versions[0].version, pkg.version)
   assert.deepEqual(plugin.versions[0].engines, { dsh: pkg.engines.dsh })
+  const repositoryUrl = pkg.repository.url.replace(/^git\+/, '').replace(/\.git$/, '')
+  assert.deepEqual(plugin.repository, { url: repositoryUrl })
+  const { source } = plugin.versions[0]
+  assert.equal(source.type, 'git')
+  assert.equal(source.url, repositoryUrl)
+  assert.match(source.commit, /^[0-9a-f]{40}$/)
   assert.deepEqual(await readFile(new URL('../market/icons/dsh-agentswarm.svg', import.meta.url)), await readFile(new URL('../icon.svg', import.meta.url)))
 })
 

@@ -22,6 +22,9 @@
       "icon": "icons/dsh-agentswarm.svg",
       "author": "Andrew Siah",
       "homepage": "https://agentswarm.space",
+      "repository": {
+        "url": "https://github.com/andrewsiah/agentswarm-dsh-plugin"
+      },
       "metadata": {
         "keywords": [
           "dsh-plugin",
@@ -40,9 +43,11 @@
       "versions": [
         {
           "version": "0.1.0",
-          "publishTimestamp": 1794164747,
+          "publishTimestamp": 1794167202,
           "source": {
-            "type": "npm"
+            "type": "git",
+            "url": "https://github.com/andrewsiah/agentswarm-dsh-plugin",
+            "commit": "253715798c297e0d438a708d45d1c2b8bb4ecc2b"
           },
           "engines": {
             "dsh": ">=0.2.2-rc.1 <0.3.0"
