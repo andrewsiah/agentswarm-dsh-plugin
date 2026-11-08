@@ -22,19 +22,27 @@ test('market entry matches the package manifest and locales', async () => {
   assert.deepEqual(plugin.versions[0].engines, { dsh: pkg.engines.dsh })
   const repositoryUrl = pkg.repository.url.replace(/^git\+/, '').replace(/\.git$/, '')
   assert.deepEqual(plugin.repository, { url: repositoryUrl })
-  const { source } = plugin.versions[0]
-  assert.equal(source.type, 'git')
-  assert.equal(source.url, repositoryUrl)
-  assert.match(source.commit, /^[0-9a-f]{40}$/)
+  assert.notEqual(pkg.private, true)
+  assert.deepEqual(plugin.versions[0].source, { type: 'npm' })
   assert.deepEqual(await readFile(new URL('../market/icons/dsh-agentswarm.svg', import.meta.url)), await readFile(new URL('../icon.svg', import.meta.url)))
 })
 
-test('DSH accepts the index at its GitHub Pages URL and installs the pinned commit', () => {
+test('DSH accepts the index at its GitHub Pages URL and installs the exact npm version', () => {
   const parsed = parseMarketIndex(index, 'https://andrewsiah.github.io/agentswarm-dsh-plugin/index.json')
   const [plugin] = parsed.plugins
   assert.equal(plugin.icon, 'https://andrewsiah.github.io/agentswarm-dsh-plugin/icons/dsh-agentswarm.svg')
-  const { commit } = index.plugins[0].versions[0].source
-  assert.deepEqual(marketInstallTarget(plugin.name, plugin.versions[0]), { spec: `git+https://github.com/andrewsiah/agentswarm-dsh-plugin.git#${commit}` })
+  assert.deepEqual(marketInstallTarget(plugin.name, plugin.versions[0]), { spec: `${pkg.name}@${pkg.version}` })
+})
+
+test('npm release timestamp has replaced the old Git tag time', () => {
+  for (const plugin of index.plugins) {
+    for (const version of plugin.versions) {
+      if (version.source.type === 'npm') {
+        assert.notEqual(version.publishTimestamp, 1794167202,
+          'Publish the package, then run node scripts/set-publish-time.mjs before deploying the market index')
+      }
+    }
+  }
 })
 
 test('metadata never promises withdrawable earnings', () => {

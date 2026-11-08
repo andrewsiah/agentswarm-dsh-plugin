@@ -4,7 +4,7 @@
 
 一个 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness)（DSH）插件包，帮你的智能体在 [agentswarm.space](https://agentswarm.space) 上找到有价值的付费任务。
 
-**状态：v0.1.0，已在 GitHub 发布。** 尚未发布到 npm，请通过 Git 或下方的自定义插件市场安装。在 npm 发布之前，`package.json` 保留 `"private": true`。
+**状态：v0.1.0 已在 GitHub 发布；此分支准备 npm 发布。** 下方的 npm 安装命令和 npm 市场条目在发布后才可用。发布前仍可通过 `git+https://github.com/andrewsiah/agentswarm-dsh-plugin.git#v0.1.0` 安装 Git 版本。
 
 ## 包含内容
 
@@ -26,7 +26,7 @@
 需要 DSH 0.2.2-rc.1 或更高的 0.2.x 版本（`engines.dsh`）。
 
 ```sh
-dsh plugin --profile web add "git+https://github.com/andrewsiah/agentswarm-dsh-plugin.git#v0.1.0"
+dsh plugin --profile web add "dsh-agentswarm@0.1.0"
 ```
 
 该命令把包安装到 profile，并把 `dsh-agentswarm` 追加到 `dsh.profile.bundles`。未开启 HMR 时请重启 profile。如需试用本地代码，在本目录执行 `npm pack`，再添加 `"file:$PWD/dsh-agentswarm-0.1.0.tgz"`；也可以在 Web 应用中让智能体用 `plugin_manager`（`action: install_bundle`，`target` 为本目录的绝对路径）安装。
@@ -35,13 +35,22 @@ dsh plugin --profile web add "git+https://github.com/andrewsiah/agentswarm-dsh-p
 
 ## 自定义插件市场（实验性）
 
-`market/index.json` 和 `market/icons/` 是一个 DSH 插件索引（format 1），以固定到 `v0.1.0` 提交的 Git 来源列出本插件包。GitHub Pages 地址：
+`market/index.json` 和 `market/icons/` 是一个 DSH 插件索引（format 1），以 npm 来源列出本插件包，并固定到 `0.1.0` 版本。GitHub Pages 地址：
 
 ```text
 https://andrewsiah.github.io/agentswarm-dsh-plugin/index.json
 ```
 
 在 DSH 中开启 **Custom plugin indexes**，然后在 **插件 → 发现 → 添加索引源** 中填入该地址。
+
+## 完成 npm 发布
+
+发布 npm 包之前不要把此分支合入 `main`。索引中的 `publishTimestamp` 仍为之前的 Git 标签时间（`1794167202`）；在替换之前，发布时间测试会故意失败。
+
+1. 使用已授权的 npm token 把 `dsh-agentswarm@0.1.0` 发布到公共 npm registry。
+2. 运行 `node scripts/set-publish-time.mjs`。脚本从公共 registry 读取 `npm view dsh-agentswarm time --json`，并用该确切版本的发布时间更新索引。版本不存在或时间无效时不会修改索引。
+3. 运行 `npm ci && npm test`。市场测试通过 DSH 的 `parseMarketIndex` 和 `marketInstallTarget` 验证 npm 来源及确切安装目标。发布前可运行 `node --test --test-skip-pattern='npm release timestamp'` 检查其他测试。
+4. 审查并提交时间戳更新，然后推送完整发布到 `main`，让 Pages 重新部署。验证 `npm view dsh-agentswarm version`，并用 `parseMarketIndex` 验证上方 URL 的线上索引后，才能标记发布完成。
 
 ## 许可证
 

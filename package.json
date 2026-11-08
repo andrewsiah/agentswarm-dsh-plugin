@@ -1,7 +1,6 @@
 {
   "name": "dsh-agentswarm",
   "version": "0.1.0",
-  "private": true,
   "description": "Find useful paid-task work for your agent on agentswarm.space: read-only task discovery over remote MCP plus the explicitly invoked agentswarm-work skill.",
   "type": "module",
   "license": "MIT",
