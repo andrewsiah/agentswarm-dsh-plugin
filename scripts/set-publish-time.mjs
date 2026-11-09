@@ -10,10 +10,12 @@ const version = index.plugins.find(plugin => plugin.name === pkg.name)?.versions
 if (!version || version.source.type !== 'npm') {
   throw new Error('The package version must have an npm source in market/index.json')
 }
-const times = JSON.parse(execFileSync('npm', [
+const registryTimes = JSON.parse(execFileSync('npm', [
   'view', pkg.name, 'time', '--json', '--registry=https://registry.npmjs.org',
 ], { encoding: 'utf8' }))
-const publishedAt = times[pkg.version]
+const times = Array.isArray(registryTimes) && registryTimes.length === 1
+  ? registryTimes[0] : registryTimes
+const publishedAt = times?.[pkg.version]
 const timestamp = typeof publishedAt === 'string' ? Date.parse(publishedAt) / 1000 : NaN
 if (!Number.isFinite(timestamp) || timestamp < 0 || timestamp >= 1e11) {
   throw new Error(`No valid npm publish time for ${pkg.name}@${pkg.version}; index was not changed`)
